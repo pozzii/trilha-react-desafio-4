@@ -1,3 +1,5 @@
+
+
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -6,6 +8,8 @@ import * as yup from "yup";
 
 import { Container, LoginContainer, Column, Spacing, Title } from "./styles";
 import { defaultValues, IFormLogin } from "./types";
+
+
 
 const schema = yup
   .object({
@@ -17,16 +21,16 @@ const schema = yup
   })
   .required();
 
-const Login = () => {
-  const {
-    control,
-    formState: { errors, isValid },
-  } = useForm<IFormLogin>({
-    resolver: yupResolver(schema),
-    mode: "onBlur",
-    defaultValues,
-    reValidateMode: "onChange",
-  });
+  const Login = () => {
+    const {
+      control,
+      formState: { errors, isValid },
+    } = useForm<IFormLogin>({
+      resolver: yupResolver(schema),
+      mode: "onChange",
+      defaultValues,
+    });
+
 
   return (
     <Container>
@@ -49,7 +53,7 @@ const Login = () => {
             errorMessage={errors?.password?.message}
           />
           <Spacing />
-          <Button title="Entrar" />
+          <Button title="Entrar" disabled={!isValid}/>
         </Column>
       </LoginContainer>
     </Container>
